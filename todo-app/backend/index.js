@@ -51,6 +51,7 @@ app.get('/todo/:id', async(req, res)=>{
 })
 
 app.put('/todo/:id', async(req, res)=> {
+    console.log(req.body)
     try{
         const {id} = req.params 
         const {description, cod_priority} = req.body

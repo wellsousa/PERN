@@ -39,7 +39,7 @@ const List = () =>{
                     <td className={ cod_priority == 0?"no_priority":(cod_priority ==1?"low_priority":(cod_priority == 2?"average_priority":"high_priority")) }>{label}</td>
                     <td>{description}</td>
                     <td>
-                        <EditTodo/>
+                        <EditTodo data={data}/>
                     </td>
                     <td>
                         <button className="btn btn-danger"

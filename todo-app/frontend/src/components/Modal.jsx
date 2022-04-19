@@ -1,16 +1,16 @@
-import React, {Component, Fragment, useState} from 'react'
+import React, {Fragment, useState} from 'react'
 
-class Modal extends Component{
-    state = {
-        description: this.props.data.description,
-        cod_priority: this.props.data.cod_priority
-    }
-    render(){
+const Modal =({data, hide, url})=>{
+
+    const [description, setDescription] = useState(data.description)
+    const [codPriority, setCodPriorioty] = useState(data.cod_priority)
+
 
         let modalStyle = {
             display: 'block',
             backgroundColor: 'rgba(0,0,0,0.8)'
         }
+
         return (
             <Fragment>
             
@@ -18,35 +18,42 @@ class Modal extends Component{
                     <div className="modal-dialog">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title">Editar Tarefa - {this.props.data.label} </h5>
-                                <button type="button" className="btn-close" onClick={this.props.hide}></button>
+                                <h5 className="modal-title">Editar Tarefa - {data.label} </h5>
+                                <button type="button" className="btn-close" onClick={hide}></button>
                             </div>
                             <form>
                                 <div className="modal-body">
                                     <div>
                                         <label>Descrição</label>
-                                        <input className="form-control" type="text" value="{this.state.description}"
+                                        <input className="form-control" type="text" value={description}
                                               onChange={(e)=>{
-                                                this.state.description = e.target.value
+                                                setDescription(e.target.value)
                                               }}></input>
                                     </div>
                                     <div>
                                         <label>Prioridade</label>
-                                        <input className="form-control" type="text" value={this.state.cod_priority}></input>
+                                        <input className="form-control" type="text" value={codPriority}
+                                            onChange={(e)=>{
+                                                setCodPriorioty(e.target.value)
+                                            }}></input>
                                     </div>
                                 </div>
                                 <div className="modal-footer">
-                                    <button type="button" className="btn btn-secondary" onClick={this.props.hide}>Fechar</button>
+                                    <button type="button" className="btn btn-secondary" onClick={hide}>Fechar</button>
                                     <button type="button" className="btn btn-primary" 
                                             onClick={ async ()=>{
                                                 try{
-                                                    console.log(`${this.props.url}/${this.props.data.id}`)
+                                                    console.log(`${url}/${data.id}`)
                                                     
-                                                    const response = await fetch(`http://localhost:5000/todo/${this.props.data.id}`,{
+                                                    const response = await fetch(`http://localhost:5000/todo/${data.id}`,{
                                                         method: 'PUT',
                                                         headers: {"Content-Type":"application/json"},
-                                                        body: JSON.stringify({"description":"hello world", "cod_priority":3})
+                                                        body: JSON.stringify({"description":description, "cod_priority":codPriority})
                                                     })
+
+                                                    hide()
+
+                                                    window.location = "/"
                                                  }catch(err){
                                                      console.error(err.message)
                                                  }
@@ -58,7 +65,7 @@ class Modal extends Component{
                 </div>
             </Fragment>
         )
-    }
+    
 }
 
 export default Modal;

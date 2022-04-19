@@ -1,0 +1,10 @@
+
+/*
+*POSTEGRES
+*    User: postgres 
+*    Password: workspace
+*
+*    User: doko
+*    Passeword: 1234
+*
+*/

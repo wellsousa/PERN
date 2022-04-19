@@ -1,0 +1,7 @@
+/*
+* CRIAR UM PROJETO REACT
+*/
+
+npm create vite@latest frotend -- --react
+npm install
+npm run dev 

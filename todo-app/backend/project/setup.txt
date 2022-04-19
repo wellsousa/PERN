@@ -1,0 +1,16 @@
+
+projeto: PERN STACK(Postgres, Express, React, Node)
+
+*frontend
+ - npm create vite@latest frontend -- --template react
+ - cd frontend
+ - npm install
+ - npm run dev
+
+ *backend
+  -mkdir backend
+  -cd backend
+  -npm init -y
+  -npm install Express
+  - npm install pg 
+  -npm install cors

@@ -1,0 +1,16 @@
+
+.no_priority{
+    color: green;
+}
+
+.low_priority{
+    color: blue;
+}
+
+.average_priority{
+    color: orange;
+}
+
+.high_priority{
+    color: red;
+}

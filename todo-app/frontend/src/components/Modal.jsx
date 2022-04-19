@@ -3,7 +3,7 @@ import React, {Fragment, useState} from 'react'
 const Modal =({data, hide, url})=>{
 
     const [description, setDescription] = useState(data.description)
-    const [codPriority, setCodPriorioty] = useState(data.cod_priority)
+    const [cod_priority, setCodPriorioty] = useState(data.cod_priority)
 
 
         let modalStyle = {
@@ -32,7 +32,7 @@ const Modal =({data, hide, url})=>{
                                     </div>
                                     <div>
                                         <label>Prioridade</label>
-                                        <input className="form-control" type="text" value={codPriority}
+                                        <input className="form-control" type="text" value={cod_priority}
                                             onChange={(e)=>{
                                                 setCodPriorioty(e.target.value)
                                             }}></input>
@@ -45,10 +45,11 @@ const Modal =({data, hide, url})=>{
                                                 try{
                                                     console.log(`${url}/${data.id}`)
                                                     
+                                                    const body = {description, cod_priority}
                                                     const response = await fetch(`http://localhost:5000/todo/${data.id}`,{
                                                         method: 'PUT',
                                                         headers: {"Content-Type":"application/json"},
-                                                        body: JSON.stringify({"description":description, "cod_priority":codPriority})
+                                                        body: JSON.stringify(body)
                                                     })
 
                                                     hide()

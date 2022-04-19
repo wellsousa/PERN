@@ -1,0 +1,13 @@
+
+
+* instalação das blibliotecas express e pg
+   npm install express
+   npm install pg 
+
+
+
+   *para ver a aplicação rodando faça:
+
+   node index //para rodar a aplicação 
+
+   acesse: localhost:3001/

@@ -1,0 +1,29 @@
+
+*senha sueperuario
+    workspace
+
+*entrar com o superusuario no postgres
+
+    psql -U postgres
+
+*listar todas as bases dados
+
+    \l
+
+*listar todos os usuarios:
+ 
+    \du
+
+* criar um usuario
+    CREATE USER doko WITH ENCRYPTED PASSWORD '1234'
+
+* permitindo que o usuario tenha permissoes do superusuarios postgres
+ ALTER ROLE wttsousa SUPERUSER INHERIT LOGIN;
+
+*se necessario, alterar as regras do usuario para um usuario avançado
+    ALTER ROLE wttsousa CREATEROLE CREATEDB REPLICATION BYPASSRLS;
+
+*RLS = Role Level Security
+
+* Para acessar a base de dados com o usuario criado
+psql -d postgres -U doko

@@ -2,3 +2,6 @@
     - server: ´projeto do backend em node js
     - client: projeto do frontend em react
     - database: armazena as migrations para o banco postgres
+
+* criado o arquivo .env para variaveis de ambiente do projeto
+

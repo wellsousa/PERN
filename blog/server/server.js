@@ -1,8 +1,7 @@
 const express = require('express')
 const app = express()
 
-app.get('/', ()=>{
-    console.log('hello')
-})
+app.use('/', require('./src/api/routes/posts'))
+
 
 app.listen(5001)

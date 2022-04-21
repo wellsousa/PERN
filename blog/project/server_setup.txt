@@ -24,9 +24,24 @@ npm install axios
 *   FOLDER STRUCTURE
 */
 
-    _ server
-        - route
-        - service
-        - data
-        - db
-        - test
+    _ server 
+        -src 
+            -api
+                -controllers    =>tratamento e despacho das requisições
+                -helpers        => funções genericas
+                -middlewares
+                -models         => schemas de bancos de dados
+                -routes         => rotas
+                -services       => regras de negocios(calculos, requisições para a base de dados, etc)
+                _validations    => validações de dados
+            -db
+                -connection
+                -migrations 
+        -tests
+
+
+* após instalar o jest:
+    - adicionar ao package.json na seção de scripts o script de test:
+    "scripts": {
+    "test": "jest --env node"
+  },

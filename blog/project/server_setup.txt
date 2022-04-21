@@ -1,0 +1,32 @@
+
+
+* Na pasta server
+
+npm init -y
+
+* instalação do express
+
+npm install express
+
+* lib de conexao com o postgres
+
+npm install pg 
+
+* lib de testes
+
+npm install jest
+
+* lib para requisições http
+
+npm install axios
+
+/*
+*   FOLDER STRUCTURE
+*/
+
+    _ server
+        - route
+        - service
+        - data
+        - db
+        - test

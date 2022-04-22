@@ -10,6 +10,11 @@ const request=(url, method, data)=>{
     return axios({url, method, data})
 }
 
+/*
+    test.only('Should get posts', async ()=>{
+        //executa apenas esta função em especifico
+    })
+*/
 test('Should get posts', async ()=>{
 
     //given - dado que
@@ -17,7 +22,6 @@ test('Should get posts', async ()=>{
     const post2 = await postService.savePost({title: generateRandomText(10), content: generateRandomText(30)})
     const post3 = await postService.savePost({title: generateRandomText(10), content: generateRandomText(30)})
 
-    console.log(post1)
     //when - quando acontecer
     const res = await request('http://localhost:5001/posts','GET')
     
@@ -28,4 +32,19 @@ test('Should get posts', async ()=>{
     await postService.deletePost(post1.rows[0].id)
     await postService.deletePost(post2.rows[0].id)
     await postService.deletePost(post3.rows[0].id)
+})
+
+test.only('Should create a Post', async ()=>{
+
+    const data = {"title": generateRandomText(10), "content": generateRandomText(30)}
+    const res = await request('http://localhost:5001/posts','POST', data)
+
+    const response = res.data 
+    /*
+        Verifca se o dado gravado no banco é o mesmo dado que foi enviado
+    */
+    expect(response[0].title).toBe(data.title)
+    expect(response[0].content).toBe(data.content)
+
+    await postService.deletePost(response[0].id)
 })

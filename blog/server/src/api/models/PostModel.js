@@ -4,39 +4,39 @@ const pool = require('../../db/config/connection')
 
 const getPosts= async () =>{
 
-    let res = []
+    let posts = []
     try{
-        res = await pool.query('SELECT * FROM blog.posts')
-    }catch(err){
-        //console.log(err.message)
-    }
-
-    return res
-}
-
-const savePost= async (post)=>{
-    
-    let res = []
-    const {title, content} = post
-    
-    try{
-        res = await pool.query(`INSERT INTO blog.posts (title, content) VALUES('${title}', '${content}') RETURNING *`)
+        posts = await pool.query('SELECT * FROM blog.posts')
     }catch(err){
         console.log(err.message)
     }
 
-    return res
+    return posts
+}
+
+const savePost= async (post)=>{
+
+    const {title, content} = post
+    let newPost
+
+    try{
+        newPost = await pool.query(`INSERT INTO blog.posts (title, content) VALUES('${title}', '${content}') RETURNING *`)
+    }catch(err){
+        console.log(err.message)
+    }
+
+    return newPost
 }
 
 const deletePost = async (id) =>{
-    let res = []
+    let deletedPost = []
     try{
-        res = await pool.query(`DELETE FROM blog.posts WHERE id=${id}`)
+        deletedPost = await pool.query(`DELETE FROM blog.posts WHERE id=${id}`)
     }catch(err){
         console.error(err.message)
     }
 
-    return res
+    return deletedPost
 }
 
 module.exports={

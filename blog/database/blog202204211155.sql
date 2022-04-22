@@ -1,6 +1,8 @@
 create schema blog;
 
-create table blog.post(
+drop table blog.posts
+
+create table blog.posts(
     id serial primary key,
     title text not null,
     content text not null,

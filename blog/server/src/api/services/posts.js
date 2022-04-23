@@ -1,30 +1,30 @@
 
 const PostModel = require('../models/PostModel')
 
-const getPosts = ()=>{
-    return PostModel.getPosts()
+const list = ()=>{
+    return PostModel.list()
 }
 
-const savePost = (post)=>{
-    return PostModel.savePost(post)
+const create = (post)=>{
+    return PostModel.create(post)
 }
 
-const getPost = (id)=>{
-    return PostModel.getPost(id)
+const get = (id)=>{
+    return PostModel.get(id)
 }
 
-const updatePost = (data)=>{
-    return PostModel.updatePost(data)
+const update = (data)=>{
+    return PostModel.update(data)
 }
 
-const deletePost = (id)=>{
-    return PostModel.deletePost(id)
+const remove = (id)=>{
+    return PostModel.remove(id)
 }
 
 module.exports={
-    getPosts,
-    savePost,
-    getPost,
-    updatePost,
-    deletePost,
+    list,
+    create,
+    get,
+    update,
+    remove,
 }

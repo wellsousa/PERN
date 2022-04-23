@@ -1,40 +1,40 @@
 const postServices = require('../services/posts')
 
 const index = async (req, res)=>{
-    const posts = await postServices.getPosts() 
+    const posts = await postServices.list() 
 
     return res.json(posts.rows)
 }
 
 const create = async(req, res) =>{
-    const post = await postServices.savePost(req.body)
+    const post = await postServices.create(req.body)
 
     return res.json(post.rows)
 }
 
-const getPost = async(req, res)=>{
+const get = async(req, res)=>{
     const {id} = req.params
 
-    const post = await postServices.getPost(id)
+    const post = await postServices.get(id)
 
     return res.json(post.rows)
 }
 
-const updatePost = async(req, res)=>{
+const update = async(req, res)=>{
     const data = {
         id: req.params.id,
         body: req.body
     }
 
-    const updatedPost = await postServices.updatePost(data)
+    const updatedPost = await postServices.update(data)
 
     return res.json(updatedPost.rows)
 }
 
-const exclude = async(req, res)=>{
+const remove = async(req, res)=>{
     const {id} = req.params
 
-    const post = await postServices.deletePost(id)
+    const post = await postServices.remove(id)
 
     return res.json(post.rows)
 }
@@ -42,7 +42,7 @@ const exclude = async(req, res)=>{
 module.exports ={
     index,
     create,
-    getPost,
-    updatePost,
-    exclude,
+    get,
+    update,
+    remove,
 }

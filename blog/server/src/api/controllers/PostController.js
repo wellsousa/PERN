@@ -12,9 +12,28 @@ const create = async(req, res) =>{
     return res.json(post.rows)
 }
 
-const exclude = async(req, res)=>{
-    console.log(req)
+const getPost = async(req, res)=>{
     const {id} = req.params
+
+    const post = await postServices.getPost(id)
+
+    return res.json(post.rows)
+}
+
+const updatePost = async(req, res)=>{
+    const data = {
+        id: req.params.id,
+        body: req.body
+    }
+
+    const updatedPost = await postServices.updatePost(data)
+
+    return res.json(updatedPost.rows)
+}
+
+const exclude = async(req, res)=>{
+    const {id} = req.params
+
     const post = await postServices.deletePost(id)
 
     return res.json(post.rows)
@@ -23,5 +42,7 @@ const exclude = async(req, res)=>{
 module.exports ={
     index,
     create,
+    getPost,
+    updatePost,
     exclude,
 }

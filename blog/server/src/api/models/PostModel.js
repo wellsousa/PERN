@@ -1,4 +1,5 @@
 
+const res = require('express/lib/response')
 const pool = require('../../db/config/connection')
 
 
@@ -28,6 +29,37 @@ const savePost= async (post)=>{
     return newPost
 }
 
+const getPost  = async (id)=>{
+    let post=[]
+    try{
+        post = await pool.query(`SELECT * FROM blog.posts WHERE id=${id}`)
+    }catch(err){
+        console.error(err.message)
+    }
+
+    return post
+}
+
+const updatePost = async (data)=>{
+    let updatedPost =[]
+    const {id, body} = data
+    const {title, content} = body
+
+    try{
+        updatedPost = await pool.query(`UPDATE blog.posts
+                                            SET
+                                            title='${title}',
+                                            content='${content}'
+                                        WHERE id=${id} RETURNING *`)
+
+                                  
+    }catch(err){
+        console.error(err.message)
+    }
+
+    return updatedPost
+}
+
 const deletePost = async (id) =>{
     let deletedPost = []
     try{
@@ -42,5 +74,7 @@ const deletePost = async (id) =>{
 module.exports={
     getPosts,
     savePost,
+    getPost,
+    updatePost,
     deletePost,
 }

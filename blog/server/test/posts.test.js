@@ -34,7 +34,7 @@ test('Should get posts', async ()=>{
     await postService.deletePost(post3.rows[0].id)
 })
 
-test.only('Should create a Post', async ()=>{
+test('Should create a Post', async ()=>{
 
     const data = {"title": generateRandomText(10), "content": generateRandomText(30)}
     const res = await request('http://localhost:5001/posts','POST', data)
@@ -47,4 +47,42 @@ test.only('Should create a Post', async ()=>{
     expect(response[0].content).toBe(data.content)
 
     await postService.deletePost(response[0].id)
+})
+
+test('Should update a post', async ()=>{
+    const response = await postService.savePost({
+        title: generateRandomText(10),
+        content: generateRandomText(30)
+    })
+
+    let post = response.rows[0]
+    post.title =  generateRandomText(10)
+    post.content = generateRandomText(30)
+
+    await request(`http://localhost:5001/posts/${post.id}`,'PUT', post)
+    const updatedPost = await postService.getPost(post.id)
+
+    console.log('updatedPost')
+    console.log(updatedPost)
+    expect(updatedPost.rows[0].title).toBe(post.title)
+    expect(updatedPost.rows[0].content).toBe(post.content)
+
+    await postService.deletePost(post.id)
+})
+
+test('Should delete a post', async ()=>{
+    const response = await postService.savePost({
+        title: generateRandomText(10),
+        content: generateRandomText(30)
+    })
+
+    const post = response.rows[0]
+    console.log(post)
+    await request(`http://localhost:5001/posts/${post.id}`,'DELETE')
+
+    const postDeleted = await postService.getPost(post.id)
+
+    expect(postDeleted.rows[0]).toBeUndefined()
+
+    console.log(postDeleted)
 })
